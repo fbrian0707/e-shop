@@ -1,0 +1,15 @@
+.card-footer {
+	padding: 0;
+}
+
+.card {
+	margin-bottom: 30px;
+}
+
+.card-footer button {
+	cursor: pointer;
+}
+
+.temps {
+	height: 15em;		
+}

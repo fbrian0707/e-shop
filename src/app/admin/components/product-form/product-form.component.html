@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-6">
+
+<form #f="ngForm" (ngSubmit)="save(f.value)">
+    <div class="form-group">
+      <label for="title" >Title</label>
+      <input [(ngModel)]="product.title" #title="ngModel" name="title" id="title" type="text" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="title.touched && title.invalid" >Title required</div>    
+    </div>
+    <div class="form-group">
+      <label for="price" >Price</label>
+      <div class="input-group"><span class="input-group-addon">$</span>
+      <input [(ngModel)]="product.price" #price="ngModel" name="price" id="price" type="number" class="form-control" required>
+        </div>
+         <div class="alert alert-danger" *ngIf="price.touched && price.invalid" >price required</div>    
+    </div>
+    <div class="form-group">
+      <label for="category" >Category</label>
+	  <option></option>
+      <select [(ngModel)]="product.category" #category="ngModel" name="category" id="category" class="form-control" required>
+        <option *ngFor="let c of categories$ | async" [value]="c.name.toLowerCase().substr(0,c.name.indexOf(' '))">
+          {{c.name}}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="category.touched && category.invalid" >category required</div>     
+    </div>
+    <div class="form-group">
+      <label for="imageUrl" >Image Url</label>
+      <input [(ngModel)]="product.imageUrl" #imageUrl="ngModel" name="imageUrl" id="imageUrl" type="text" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid" >imageUrl required</div>    
+    </div>
+    <button class="btn btn-primary">save</button>
+    <button type="button" class="btn btn-danger" (click)="delete()">delete</button>  
+  </form>
+	
+
+  </div>
+  <div class="col-md-6">
+      <product-card [product]="product" [show-actions]="false"></product-card>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+						<div *ngIf="product" class="card">
+						  <img class="card-img-top temps" height="100%" width="100%" [src]="product.imageUrl" (click)="open(content)"
+						  *ngIf="product.imageUrl" alt="{{product.title}}" >
+						  <div class="card-body">
+							<h4 class="card-title">{{ product.title }}</h4>
+							<p class="card-text">{{product.price | currency:'USD':'symbol'}}</p>
+							<div *ngIf="actions && cart" class="card-footer">
+						  <button *ngIf="cart.getQuantity(product) === 0;else foot" (click)="addToCart()" class="btn btn-secondary btn-block">Add to Cart</button>
+							<ng-template #foot >
+									<product-quantity [product]="product" [shopping-cart]="cart"></product-quantity>
+							</ng-template>
+						    </div>
+						  </div>
+						</div>
+
+
+
+						<!-- Modal -->
+						<ng-template #content let-c="close" let-d="dismiss" class="col-10 col-sm-6">
+							<div class="modal-header">
+								<h4 class="modal-title">{{product.title}}</h4>
+								<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body" style="height: 16em;opacity: 0.9;color: white;"   [ngStyle]="{'background': '#fff url(' + product.imageUrl + ') no-repeat 0 0', 'background-size': '100% 100%'}" >
+							<div style="height: 100%; opacity: 1;background-color: rgba(0,0,0,0.4)">
+							<ul style="list-style: none;">
+							<li><b>Total Fat</b>: 12g
+							<ul style="list-style: none;"><li>Saturated Fat: 3g</li><li>Trans Fat: 3g</li></ul>
+							</li>
+							<li><b>Cholesterol</b>: 30mg</li>
+							<li><b>Sodium</b>: 470mg</li>
+							<li><b>Total Carbohydrate</b>: 31g
+							<ul style="list-style: none;"><li>Dietary Fiber: 0g</li><li>Sugar: 5g</li></ul>
+							</li>
+							<li><b>Protein</b>: 35g</li>
+							</ul>
+							</div>
+							</div>
+							<div class="modal-footer">
+							<span class="font-weight-bold text-primary">{{product.price | currency}}</span>
+								<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+							</div>
+						</ng-template>

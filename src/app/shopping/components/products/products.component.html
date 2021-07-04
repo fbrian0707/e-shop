@@ -1,0 +1,27 @@
+<div class="container" *ngIf="busy">
+    <i class="fa fa-circle-o-notch fa-spin fa-5x col-6 mx-auto"
+       style="display: block; text-align: center;"></i>
+</div>
+
+<div class="row">
+  <div class="col-3 col-sm-3" [@slideUp]="stateSide">
+   <product-filter [category]="category"></product-filter>
+  </div>
+  <div class="col" [@slideIn]="stateMain">
+      <div class="row"> 
+          <ng-container *ngFor="let p of filteredProducts; let i = index">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                  <product-card [product] = "p" [show-actions]="true" [shopping-cart]="cart" ></product-card>
+              </div>
+              <div *ngIf="(i+1)%2 === 0" class="w-100"></div>
+          </ng-container>
+          
+        </div>
+        
+  </div>
+</div>
+
+
+
+
+
